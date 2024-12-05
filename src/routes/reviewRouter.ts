@@ -8,7 +8,7 @@ const router = express.Router();
 // Delete review endpoint
 router.put("/undelete/review/:id", async (req, res) => {
     try {
-        const result = await deleteReview(req.params.id); // Pass only the ID
+        const result = await unDeleteReview(req.params.id); // Pass only the ID
         console.log("Deleting review with ID: ", req.params.id);
 
         res.status(200).send(result);
@@ -19,7 +19,7 @@ router.put("/undelete/review/:id", async (req, res) => {
 });
 
 
-export async function deleteReview(id: any) {
+export async function unDeleteReview(id: any) {
     try {
         // Step 1: Check if the review exists
         const review = await Reviews.findByPk(id);

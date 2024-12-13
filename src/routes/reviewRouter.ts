@@ -1,12 +1,13 @@
 import express from "express";
 import { Review as Reviews, User, Media, Genre, ReviewGenres } from "../other_services/model/seqModel";
 import { publishToQueue } from "../other_services/rabbitMQ";
+import verifyUser from "./authenticateUser";
 
 const router = express.Router();
 
 
 // Delete review endpoint
-router.put("/undelete/review/:id", async (req, res) => {
+router.put("/undelete/review/:id", verifyUser, async (req, res) => {
     try {
         const result = await unDeleteReview(req.params.id); // Pass only the ID
         console.log("Deleting review with ID: ", req.params.id);
